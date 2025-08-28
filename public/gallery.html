@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Galería — Protesta y símbolos (plantilla)</title>
+  <meta name="description" content="Galería de imágenes con ejemplos estilizados. Use esta plantilla para pruebas y agregue contexto editorial.">
+  <style>
+    :root{
+      --bg1: #0b0b0f;
+      --bg2: #111118;
+      --card: #121217;
+      --accent: #f59e0b;
+      --max-width: 1100px;
+    }
+
+    html,body{
+      height:100%;
+      margin:0;
+      background: linear-gradient(180deg,var(--bg1),var(--bg2));
+      color:#eee;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.4;
+    }
+
+    .wrap{
+      max-width:var(--max-width);
+      margin:24px auto;
+      padding:20px;
+    }
+
+    header{
+      text-align:center;
+      margin-bottom:18px;
+    }
+h1{margin:0 0 6px;font-size:1.6rem}
+p.lead{margin:0;color:#cfcfcf;font-size:0.95rem}
+
+    /* Gallery grid */
+    .gallery{
+      display:grid;
+      grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+      gap:16px;
+      margin-top:18px;
+    }
+
+    figure.card{
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.06));
+      border-radius:10px;
+      overflow:hidden;
+      padding:0;
+      margin:0;
+      position:relative;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.6);
+      border:1px solid rgba(255,255,255,0.03);
+    }
+
+    .img-wrap{
+      position:relative;
+      aspect-ratio: 16/10;
+      overflow:hidden;
+      display:block;
+    }
+
+    .img-wrap img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+      transform-origin:center center;
+      transition: transform 300ms ease, filter 300ms ease;
+      will-change: transform, filter;
+    }
+
+    figure.card:hover img{ transform: scale(1.03); filter: saturate(1.05) contrast(1.02); }
+
+    figcaption{
+      padding:12px 14px;
+      font-size:0.9rem;
+      color:#ddd;
+      background: linear-gradient(180deg, rgba(0,0,0,0.02), rgba(0,0,0,0.06));
+    }
+    figcaption .meta{ font-size:0.78rem;color:#bdbdbd;margin-top:6px }
+
+    /* Stylized, non-photorealistic flame overlay.
+       This is a decorative effect — avoid combining with real photos of identifiable people or incitement. */
+    .img-wrap .flame{
+      pointer-events:none;
+      position:absolute;
+      inset:0;
+      mix-blend-mode:screen;
+      opacity:0;
+      transition: opacity 250ms ease;
+      display:block;
+    }
+
+    /* Flame shapes built with layered radial-gradients and animation */
+    .img-wrap .flame::before,
+    .img-wrap .flame::after{
+      content:"";
+      position:absolute;
+      left:50%;
+      top:70%;
+      width:180%;
+      height:160%;
+      transform: translateX(-50%) translateY(-50%) rotate(-5deg);
+      filter: blur(22px) saturate(1.2);
+      animation: flicker 2.2s infinite linear;
+      opacity:0.95;
+    }
+
+    .img-wrap .flame::before{
+      background:
+        radial-gradient(30% 45% at 50% 25%, rgba(255,200,40,0.95), rgba(255,120,20,0.75) 20%, rgba(230,70,30,0.45) 40%, transparent 60%),
+        radial-gradient(18% 36% at 30% 60%, rgba(255,245,210,0.7), transparent 50%);
+      mix-blend-mode:screen;
+      animation-duration:1.9s;
+    }
+
+    .img-wrap .flame::after{
+      background:
+        radial-gradient(24% 28% at 60% 20%, rgba(255,90,30,0.9), rgba(200,30,20,0.5) 30%, transparent 55%),
+        radial-gradient(14% 18% at 75% 65%, rgba(255,180,40,0.6), transparent 60%);
+      mix-blend-mode:screen;
+      animation-duration:2.4s;
+      transform: translateX(-50%) translateY(-42%) rotate(6deg);
+      filter: blur(30px);
+    }
+
+    @keyframes flicker{
+      0%{ transform: translateX(-50%) translateY(-50%) rotate(-3deg) scale(1); opacity:0.95 }
+      25%{ transform: translateX(-52%) translateY(-48%) rotate(-1deg) scale(1.03); opacity:0.9 }
+      50%{ transform: translateX(-50%) translateY(-46%) rotate(2deg) scale(1.06); opacity:0.98 }
+      75%{ transform: translateX(-48%) translateY(-50%) rotate(-2deg) scale(1.02); opacity:0.92 }
+      100%{ transform: translateX(-50%) translateY(-50%) rotate(-3deg) scale(1); opacity:0.95 }
+    }
+
+    /* When .burning is present, show the overlay */
+    .img-wrap.burning .flame{ opacity:0.95 }
+
+    /* controls */
+    .controls{ display:flex; gap:8px; justify-content:center; margin-top:14px; flex-wrap:wrap }
+    .btn{
+      background:#17171b;border:1px solid rgba(255,255,255,0.04);
+      color:#eee;padding:8px 12px;border-radius:8px;cursor:pointer;font-size:0.9rem;
+    }
+    .btn.secondary{ background:transparent;color:#ddd;border:1px solid rgba(255,255,255,0.06) }
+    .note{ font-size:0.82rem;color:#bbb;text-align:center;margin-top:12px }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>Galería: símbolos y manifestaciones</h1>
+      <p class="lead">Plantilla neutra para pruebas visuales. Agrega contexto, fechas y fuentes para evitar malentendidos.</p>
+    </header>
+
+    <div class="controls" aria-hidden="false">
+      <button id="toggleFire" class="btn">Alternar efecto dramático</button>
+      <button id="toggleAll" class="btn secondary">Alternar efecto en todas</button>
+    </div>
+    <div class="note">Consejo: evita usar imágenes de personas identificables sin permiso y evita símbolos incendiarios sin contexto. Añade un pie explicativo.</div>
+
+    <main class="gallery" aria-live="polite">
+      <!-- Example item 1 -->
+      <figure class="card">
+        <div class="img-wrap" data-id="1">
+          <!-- Replace src with your own files. Use /images/... if served from public root. -->
+          <img src="/images/colombian-flag.png" alt="Bandera de Colombia, variante estilizada" loading="lazy">
+          <span class="flame" aria-hidden="true"></span>
+        </div>
+        <figcaption>
+          Bandera (imagen de ejemplo). <div class="meta">Contexto: símbolo nacional — añadir descripción y fecha.</div>
+        </figcaption>
+      </figure>
+
+      <!-- Example item 2 -->
+      <figure class="card">
+        <div class="img-wrap" data-id="2">
+          <img src="/images/protest-illustration.png" alt="Ilustración de una multitud protestando" loading="lazy">
+          <span class="flame" aria-hidden="true"></span>
+        </div>
+        <figcaption>
+          Ilustración de protesta. <div class="meta">Contexto: obra artística — autor y licencia.</div>
+        </figcaption>
+      </figure>
+
+      <!-- Example item 3 (placeholder for a person or political figure) -->
+      <figure class="card">
+        <div class="img-wrap" data-id="3">
+          <img src="/images/placeholder-person.png" alt="Retrato ilustrado (genérico)" loading="lazy">
+          <span class="flame" aria-hidden="true"></span>
+        </div>
+        <figcaption>
+          Retrato ilustrado (genérico). <div class="meta">Si es una figura pública, agrega fuente y evita lenguaje difamatorio.</div>
+        </figcaption>
+      </figure>
+
+    </main>
+  </div>
+
+  <script>
+    // Simple interactivity to toggle the decorative 'flame' overlay.
+    // Use responsibly — this is purely a visual effect.
+    (function(){
+      const toggleBtn = document.getElementById('toggleFire');
+      const toggleAllBtn = document.getElementById('toggleAll');
+
+      // Toggle effect on the first image for quick demo
+      toggleBtn.addEventListener('click', () => {
+        const first = document.querySelector('.img-wrap');
+        if(!first) return;
+        first.classList.toggle('burning');
+      });
+
+      // Toggle on all images
+      toggleAllBtn.addEventListener('click', () => {
+        document.querySelectorAll('.img-wrap').forEach(el => el.classList.toggle('burning'));
+      });
+    })();
+  </script>
+</body>
+</html>
